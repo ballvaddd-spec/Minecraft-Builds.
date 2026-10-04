@@ -1,10 +1,14 @@
 # Minecraft Builds
 
-Две схемы построек для Minecraft Java и мода BuildHelper.
+Готовые схемы построек для Minecraft Java и мода BuildHelper.
 
-- `Starter_House_BuildHelper.schem` — подземный дом с небольшим огородом (13 × 9 × 12 блоков).
-- `AFK_Creeper_Farm_BuildHelper.schem` — AFK-ферма криперов (40 × 87 × 31 блоков).
+## Скачать ZIP
 
-Скачайте нужный файл `.schem` из репозитория и скопируйте его в `.minecraft/buildhelper/schematics/`.
+1. [Подземный дом с огородом — Starter_House_BuildHelper.zip](./Starter_House_BuildHelper.zip) — внутри `Starter_House_BuildHelper.schem`.
+2. [АФК-ферма криперов — AFK_Creeper_Farm_BuildHelper.zip](./AFK_Creeper_Farm_BuildHelper.zip) — внутри `AFK_Creeper_Farm_BuildHelper.schem`.
 
-**Примечание:** схемы воссозданы по видеореференсам и не являются гарантированно точными копиями; работа фермы в Minecraft не проверялась.
+**Установка:** скачай нужный ZIP, распакуй его, затем положи файл `.schem` в `.minecraft/buildhelper/schematics/`. ZIP напрямую в папку схем копировать не нужно.
+
+Отдельные файлы `.schem` также доступны прямо в репозитории.
+
+**Примечание:** схемы воссозданы по видеореференсам. Их соответствие видео и корректная работа фермы в игре пока не проверены.
