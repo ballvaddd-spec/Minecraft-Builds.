@@ -1,14 +1,14 @@
 # Minecraft Builds
 
-Готовые схемы построек для Minecraft Java и мода BuildHelper.
+Две отдельные постройки для Minecraft Java 1.21.1 / BuildHelper.
 
-## Скачать ZIP
+## Скачивание
 
-1. [Подземный дом с огородом — Starter_House_BuildHelper.zip](./Starter_House_BuildHelper.zip) — внутри `Starter_House_BuildHelper.schem`.
-2. [АФК-ферма криперов — AFK_Creeper_Farm_BuildHelper.zip](./AFK_Creeper_Farm_BuildHelper.zip) — внутри `AFK_Creeper_Farm_BuildHelper.schem`.
+- [Домик из первого видео (.zip)](./Starter_House_BuildHelper.zip) — наземный дом с двумя входами, огородом на крыше и погребом. Внутри ZIP лежит `Starter_House_BuildHelper.schem` (13 × 13 × 11 блоков).
+- [Ферма криперов из второго видео (.zip)](./AFK_Creeper_Farm_BuildHelper.zip) — ZIP с `AFK_Creeper_Farm_BuildHelper.schem`.
 
-**Установка:** скачай нужный ZIP, распакуй его, затем положи файл `.schem` в `.minecraft/buildhelper/schematics/`. ZIP напрямую в папку схем копировать не нужно.
+## Добавить в мод
 
-Отдельные файлы `.schem` также доступны прямо в репозитории.
+Распакуй архив и перенеси содержащийся внутри `.schem` в `.minecraft/buildhelper/schematics/`.
 
-**Примечание:** схемы воссозданы по видеореференсам. Их соответствие видео и корректная работа фермы в игре пока не проверены.
+Это реконструкции по видео, а не извлечённые игровые сохранения; точное совпадение с референсом и работу механизмов нужно проверить в Minecraft.
