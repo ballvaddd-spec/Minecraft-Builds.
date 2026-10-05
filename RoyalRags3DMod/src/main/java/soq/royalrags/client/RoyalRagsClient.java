@@ -24,7 +24,7 @@ import net.minecraft.util.Identifier;
 
 public final class RoyalRagsClient implements ClientModInitializer {
     private static final String MOD_ID = "royalrags";
-    private static final int TEX = 256;
+    private static final int TEX = 512;
 
     // Semantic 32x32 texture cells. Each style paints these differently.
     private static final int BASE = 0;
@@ -508,8 +508,8 @@ public final class RoyalRagsClient implements ClientModInitializer {
     // -------------------------------------------------------------------------
     private static void cube(ModelPartData parent, String name, int cell,
                              float x, float y, float z, float sx, float sy, float sz) {
-        int u = (cell % 8) * 32;
-        int v = 64 + (cell / 8) * 32;
+        int u = (cell % 8) * 48;
+        int v = 64 + (cell / 8) * 48;
         parent.addChild(name,
                 ModelPartBuilder.create().uv(u, v).cuboid(x, y, z, sx, sy, sz),
                 ModelTransform.NONE);
@@ -519,8 +519,8 @@ public final class RoyalRagsClient implements ClientModInitializer {
                                 float x, float y, float z, float sx, float sy, float sz,
                                 float pivotX, float pivotY, float pivotZ,
                                 float pitchDeg, float yawDeg, float rollDeg) {
-        int u = (cell % 8) * 32;
-        int v = (cell / 8) * 32;
+        int u = (cell % 8) * 48;
+        int v = (cell / 8) * 48;
         parent.addChild(name,
                 ModelPartBuilder.create().uv(u, v).cuboid(x, y, z, sx, sy, sz),
                 ModelTransform.of(
