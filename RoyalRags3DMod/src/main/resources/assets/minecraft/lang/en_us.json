@@ -1,0 +1,31 @@
+{
+  "item.minecraft.leather_helmet": "Ragged Tramp Hood",
+  "item.minecraft.leather_chestplate": "Ragged Tramp Jacket",
+  "item.minecraft.leather_leggings": "Ragged Tramp Trousers",
+  "item.minecraft.leather_boots": "Worn Tramp Boots",
+
+  "item.minecraft.chainmail_helmet": "Street Fighter Cap",
+  "item.minecraft.chainmail_chestplate": "Street Fighter Jacket",
+  "item.minecraft.chainmail_leggings": "Street Fighter Track Pants",
+  "item.minecraft.chainmail_boots": "Street Fighter Sneakers",
+
+  "item.minecraft.iron_helmet": "Bodyguard Glasses",
+  "item.minecraft.iron_chestplate": "Bodyguard Suit",
+  "item.minecraft.iron_leggings": "Bodyguard Trousers",
+  "item.minecraft.iron_boots": "Bodyguard Shoes",
+
+  "item.minecraft.golden_helmet": "Rich Man Gold Cap",
+  "item.minecraft.golden_chestplate": "Rich Man Luxury Suit",
+  "item.minecraft.golden_leggings": "Rich Man Trousers",
+  "item.minecraft.golden_boots": "Rich Man Shoes",
+
+  "item.minecraft.diamond_helmet": "Prince Crown",
+  "item.minecraft.diamond_chestplate": "Prince Royal Coat",
+  "item.minecraft.diamond_leggings": "Prince Royal Trousers",
+  "item.minecraft.diamond_boots": "Prince Boots",
+
+  "item.minecraft.netherite_helmet": "King Crown",
+  "item.minecraft.netherite_chestplate": "King Royal Regalia",
+  "item.minecraft.netherite_leggings": "King Royal Trousers",
+  "item.minecraft.netherite_boots": "King Royal Boots"
+}
