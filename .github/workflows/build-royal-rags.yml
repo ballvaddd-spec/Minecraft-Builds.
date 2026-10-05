@@ -36,13 +36,13 @@ jobs:
       - name: Publish ready jar to repository root
         working-directory: .
         run: |
-          cp RoyalRags3DMod/build/libs/royal-rags-3d-1.21.1-1.0.0.jar Royal_Rags_3D_1.21.1_FIXED.jar
+          cp RoyalRags3DMod/build/libs/royal-rags-3d-1.21.1-2.0.0.jar Royal_Rags_3D_1.21.1_DETAILED.jar
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Royal_Rags_3D_1.21.1_FIXED.jar
+          git add Royal_Rags_3D_1.21.1_DETAILED.jar
           if git diff --cached --quiet; then
             echo "Ready jar is already current"
           else
-            git commit -m "Publish fixed Royal Rags 3D jar"
+            git commit -m "Publish detailed Royal Rags 3D jar"
             git push
           fi
