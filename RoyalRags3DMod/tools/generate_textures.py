@@ -15,7 +15,11 @@ PAL = {
 }
 
 def png(path, pixels):
-    raw = b"".join(b"\x00" + bytes(pixels[y*W:(y+1)*W]) for y in range(H))
+    row_bytes = W * 4
+    raw = b"".join(
+        b"\x00" + bytes(pixels[y*row_bytes:(y+1)*row_bytes])
+        for y in range(H)
+    )
     def chunk(t, d):
         return struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t+d) & 0xffffffff)
     data = b"\x89PNG\r\n\x1a\n"
