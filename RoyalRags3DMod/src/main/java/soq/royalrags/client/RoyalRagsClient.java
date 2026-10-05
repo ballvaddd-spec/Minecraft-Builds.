@@ -509,7 +509,7 @@ public final class RoyalRagsClient implements ClientModInitializer {
     private static void cube(ModelPartData parent, String name, int cell,
                              float x, float y, float z, float sx, float sy, float sz) {
         int u = (cell % 8) * 32;
-        int v = (cell / 8) * 32;
+        int v = 64 + (cell / 8) * 32;
         parent.addChild(name,
                 ModelPartBuilder.create().uv(u, v).cuboid(x, y, z, sx, sy, sz),
                 ModelTransform.NONE);
