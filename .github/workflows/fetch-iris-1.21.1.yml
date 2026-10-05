@@ -1,0 +1,81 @@
+name: Fetch Iris 1.21.1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/fetch-iris-1.21.1.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-iris:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download compatible Iris for Minecraft 1.21.1 Fabric
+        shell: python
+        run: |
+          import json
+          import pathlib
+          import urllib.parse
+          import urllib.request
+
+          params = urllib.parse.urlencode({
+              "game_versions": json.dumps(["1.21.1"]),
+              "loaders": json.dumps(["fabric"]),
+          })
+          api = "https://api.modrinth.com/v2/project/iris/version?" + params
+          req = urllib.request.Request(api, headers={
+              "User-Agent": "ballvaddd-spec/Minecraft-Builds Iris fetcher"
+          })
+          with urllib.request.urlopen(req, timeout=30) as r:
+              versions = json.load(r)
+
+          preferred = [
+              v for v in versions
+              if v.get("version_type") == "release"
+              and "1.8.13" in v.get("version_number", "")
+          ]
+          if not preferred:
+              raise RuntimeError("Iris 1.8.13 for Minecraft 1.21.1 Fabric was not found on Modrinth")
+
+          version = preferred[0]
+          files = version.get("files", [])
+          file_info = next((f for f in files if f.get("primary")), files[0])
+
+          req = urllib.request.Request(file_info["url"], headers={
+              "User-Agent": "ballvaddd-spec/Minecraft-Builds Iris fetcher"
+          })
+          with urllib.request.urlopen(req, timeout=60) as r:
+              jar = r.read()
+
+          out_dir = pathlib.Path("mods")
+          out_dir.mkdir(exist_ok=True)
+          out_file = out_dir / "Iris_1.8.13_MC1.21.1_Fabric.jar"
+          out_file.write_bytes(jar)
+
+          (out_dir / "IRIS_INFO.txt").write_text(
+              "Iris Shaders for Minecraft 1.21.1 Fabric\n"
+              f"Version: {version.get('version_number')}\n"
+              "Source: https://modrinth.com/mod/iris\n"
+              "License: LGPL-3.0-only\n"
+              "Use this with Sodium 0.8.1+mc1.21.1.\n",
+              encoding="utf-8",
+          )
+          print("Downloaded", file_info.get("filename"), "->", out_file, len(jar), "bytes")
+
+      - name: Commit Iris to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mods/Iris_1.8.13_MC1.21.1_Fabric.jar mods/IRIS_INFO.txt
+          if git diff --cached --quiet; then
+            echo "Iris is already up to date."
+          else
+            git commit -m "Add Iris 1.8.13 for Minecraft 1.21.1 Fabric"
+            git push
+          fi
