@@ -520,7 +520,7 @@ public final class RoyalRagsClient implements ClientModInitializer {
                                 float pivotX, float pivotY, float pivotZ,
                                 float pitchDeg, float yawDeg, float rollDeg) {
         int u = (cell % 8) * 48;
-        int v = (cell / 8) * 48;
+        int v = 64 + (cell / 8) * 48;
         parent.addChild(name,
                 ModelPartBuilder.create().uv(u, v).cuboid(x, y, z, sx, sy, sz),
                 ModelTransform.of(
