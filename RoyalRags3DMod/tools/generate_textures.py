@@ -9,8 +9,8 @@ ITEM_OUT = ROOT / "assets/minecraft/textures/item"
 ARMOR_OUT.mkdir(parents=True, exist_ok=True)
 ITEM_OUT.mkdir(parents=True, exist_ok=True)
 
-ATLAS_W = ATLAS_H = 256
-CELL = 32
+ATLAS_W = ATLAS_H = 512
+CELL = 48
 CELL_Y = 64
 
 SEMANTICS = [
