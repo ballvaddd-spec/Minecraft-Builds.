@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: royal-rags-3d-build
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,6 +43,7 @@ jobs:
           cp RoyalRags3DMod/build/libs/royal-rags-3d-1.21.1-2.0.0.jar Royal_Rags_3D_1.21.1_DETAILED.jar
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add Royal_Rags_3D_1.21.1_DETAILED.jar
           if git diff --cached --quiet; then
             echo "Ready jar is already current"
