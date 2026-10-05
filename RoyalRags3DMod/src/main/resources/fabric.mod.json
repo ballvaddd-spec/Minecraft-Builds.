@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "royalrags",
+  "version": "${version}",
+  "name": "Royal Rags 3D",
+  "description": "Replaces vanilla armor rendering with custom 3D outfits: tramp, street fighter, bodyguard, rich, prince and king.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "soq.royalrags.client.RoyalRagsClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.7",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
