@@ -1,0 +1,9 @@
+Minecraft 1.21.1 Fabric shader compatibility pair
+
+Iris_1.8.14-beta.1_MC1.21.1_Fabric.jar = 1.8.14-beta.1+1.21.1-fabric
+Sodium_0.8.12-beta.1_MC1.21.1_Fabric.jar = mc1.21.1-0.8.12-beta.1-fabric
+
+Iris source: https://modrinth.com/mod/iris
+Sodium source: https://modrinth.com/mod/sodium
+Iris license: LGPL-3.0-only
+Install BOTH jar files together and remove the old Iris/Sodium jars first.
