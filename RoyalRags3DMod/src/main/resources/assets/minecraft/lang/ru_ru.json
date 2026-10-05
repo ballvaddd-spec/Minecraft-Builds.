@@ -1,0 +1,31 @@
+{
+  "item.minecraft.leather_helmet": "Рваный капюшон бомжа",
+  "item.minecraft.leather_chestplate": "Потрёпанная куртка бомжа",
+  "item.minecraft.leather_leggings": "Мешковатые штаны бомжа",
+  "item.minecraft.leather_boots": "Старые ботинки бомжа",
+
+  "item.minecraft.chainmail_helmet": "Кепка дворового бойца",
+  "item.minecraft.chainmail_chestplate": "Куртка дворового бойца",
+  "item.minecraft.chainmail_leggings": "Спортивные штаны дворового бойца",
+  "item.minecraft.chainmail_boots": "Кроссовки дворового бойца",
+
+  "item.minecraft.iron_helmet": "Очки телохранителя",
+  "item.minecraft.iron_chestplate": "Костюм телохранителя",
+  "item.minecraft.iron_leggings": "Брюки телохранителя",
+  "item.minecraft.iron_boots": "Туфли телохранителя",
+
+  "item.minecraft.golden_helmet": "Золотой головной убор богача",
+  "item.minecraft.golden_chestplate": "Люксовый костюм богача",
+  "item.minecraft.golden_leggings": "Брюки богача",
+  "item.minecraft.golden_boots": "Туфли богача",
+
+  "item.minecraft.diamond_helmet": "Корона принца",
+  "item.minecraft.diamond_chestplate": "Королевский камзол принца",
+  "item.minecraft.diamond_leggings": "Королевские штаны принца",
+  "item.minecraft.diamond_boots": "Сапоги принца",
+
+  "item.minecraft.netherite_helmet": "Корона короля",
+  "item.minecraft.netherite_chestplate": "Королевский костюм",
+  "item.minecraft.netherite_leggings": "Королевские поножи",
+  "item.minecraft.netherite_boots": "Королевские сапоги"
+}
