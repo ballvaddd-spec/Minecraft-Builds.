@@ -1,0 +1,139 @@
+name: Fetch Litematica and MaLiLib for 1.21.1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/fetch-litematica-1.21.1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-litematica-1.21.1
+  cancel-in-progress: false
+
+jobs:
+  fetch-mods:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download and verify official Minecraft 1.21.1 Fabric releases
+        shell: python
+        run: |
+          import hashlib
+          import io
+          import json
+          import pathlib
+          import urllib.request
+          import zipfile
+
+          mods = [
+              {
+                  "id": "litematica",
+                  "version_id": "o7i8oi1Z",
+                  "version": "0.19.61",
+                  "sha512": "626d0b9785afa5cd9915a25089213332b0ae6805e992a15c12292fa174146a354c7fa891e5f834e2eb10c281dbd4b4d69081649b2a83b48f22a66bc99220b328",
+                  "output": "Litematica_0.19.61_MC1.21.1_Fabric.jar",
+              },
+              {
+                  "id": "malilib",
+                  "version_id": "C99LEy6r",
+                  "version": "0.21.10",
+                  "sha512": "9f70b4605ea23f8c8b519622a6cbdcac6c8934c70bab3b8ea2d5da071a37e71ff74406d2e154c5ba4ebc7772d76e97ae94f5760e71632bd8a11d23ae8ae9a111",
+                  "output": "MaLiLib_0.21.10_MC1.21.1_Fabric.jar",
+              },
+          ]
+
+          def fetch(url):
+              req = urllib.request.Request(url, headers={
+                  "User-Agent": "ballvaddd-spec/Minecraft-Builds Litematica installer"
+              })
+              with urllib.request.urlopen(req, timeout=60) as response:
+                  return response.read()
+
+          destination = pathlib.Path("mods")
+          destination.mkdir(exist_ok=True)
+          for mod in mods:
+              release = json.loads(fetch("https://api.modrinth.com/v2/version/" + mod["version_id"]))
+              assert release["version_type"] == "release"
+              assert release["version_number"] == mod["version"]
+              assert "1.21.1" in release["game_versions"] and "fabric" in release["loaders"]
+              asset = next(item for item in release["files"] if item["primary"])
+              assert asset["url"].startswith("https://cdn.modrinth.com/")
+              data = fetch(asset["url"])
+              assert len(data) == asset["size"]
+              assert hashlib.sha512(data).hexdigest() == mod["sha512"] == asset["hashes"]["sha512"]
+              with zipfile.ZipFile(io.BytesIO(data)) as jar:
+                  assert jar.testzip() is None
+                  metadata = json.loads(jar.read("fabric.mod.json"))
+                  assert metadata["id"] == mod["id"] and metadata["version"] == mod["version"]
+                  assert metadata["depends"]["minecraft"] == ">=1.21 <=1.21.1"
+                  if mod["id"] == "litematica":
+                      assert metadata["depends"]["malilib"] == ">=0.21.10-"
+              (destination / mod["output"]).write_bytes(data)
+              print("Verified", mod["output"], len(data), "bytes")
+
+          licenses = destination / "licenses" / "litematica-malilib"
+          licenses.mkdir(parents=True, exist_ok=True)
+          for name in ["LGPL-3.0-only", "GPL-3.0-only"]:
+              license_text = fetch("https://raw.githubusercontent.com/spdx/license-list-data/main/text/" + name + ".txt")
+              assert b"GNU" in license_text and b"Version 3" in license_text
+              (licenses / (name.upper() + ".txt")).write_bytes(license_text)
+
+          instructions = """LITEMATICA ДЛЯ MINECRAFT JAVA 1.21.1 — FABRIC
+
+          Файлы:
+          Litematica_0.19.61_MC1.21.1_Fabric.jar
+          MaLiLib_0.21.10_MC1.21.1_Fabric.jar
+
+          1. Закрой Minecraft.
+          2. Убери BuildHelper из папки mods, если переходишь на обычную Litematica.
+          3. Удали старые версии Litematica и MaLiLib из mods, чтобы не было дубликатов.
+          4. Положи ОБА файла JAR в .minecraft/mods/
+          5. Запусти профиль Fabric для Minecraft 1.21.1.
+
+          Схемы .litematic клади в .minecraft/schematics/
+          Открыть меню Litematica: M (клавиша в английской раскладке).
+          Загрузить схему: M → Load Schematics → выбрать файл → Load Schematic.
+          В архиве фермы Iron_Farm_Wotpack_Java_1.21.1.zip используй файл .litematic.
+
+          MaLiLib обязательна: Litematica 0.19.61 требует MaLiLib 0.21.10 или новее.
+          Нужные модули Fabric API включены в этот файл MaLiLib.
+          Если полный Fabric API уже установлен для других модов, оставь его.
+
+          Официальные файлы без изменения содержимого; переименованы только JAR.
+          Проверены SHA-512, целостность архивов и fabric.mod.json.
+          Запуск игрового клиента в этой среде не выполнялся.
+
+          Автор: masa; среди участников Litematica — Sakura-Ryoko.
+          Лицензия обоих модов: LGPL-3.0-only; тексты в licenses/litematica-malilib/.
+          Релизы:
+          https://modrinth.com/mod/litematica/version/0.19.61
+          https://modrinth.com/mod/malilib/version/0.21.10
+          Исходники:
+          https://github.com/maruohon/litematica
+          https://github.com/maruohon/malilib
+          """
+          import textwrap
+          (destination / "LITEMATICA_1.21.1_INSTALL_RU.txt").write_text(
+              "\n".join(line.strip() for line in instructions.splitlines()) + "\n", encoding="utf-8-sig"
+          )
+
+      - name: Save the verified mods
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- mods/Litematica_0.19.61_MC1.21.1_Fabric.jar mods/MaLiLib_0.21.10_MC1.21.1_Fabric.jar mods/LITEMATICA_1.21.1_INSTALL_RU.txt mods/licenses/litematica-malilib/
+          if git diff --cached --quiet; then
+            echo "Matching mod files already exist."
+          else
+            git commit -m "Add verified Litematica 0.19.61 and MaLiLib 0.21.10 for Minecraft 1.21.1"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
