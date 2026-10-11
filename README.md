@@ -35,3 +35,13 @@ https://www.shulkr.com/en/schematics/aSuzSliQaedl/item-nether-portal-chunk-loade
 Проверены структура ZIP, пути и размеры текстур, прозрачность скинов, JSON-модели и состояния оружия. Запуск внутри игрового клиента не проверялся. Превью собрано из моделей и текстур пака и не является скриншотом игры.
 
 ![FreshCraft 3D — превью моделей и текстур](FreshCraft_3D_preview.jpg)
+
+## 4. Better Carpet Bots — Minecraft Java 1.21.1 / Fabric
+
+[**Скачать готовый мод JAR**](mods/better-carpet-bots-1.1.0+mc1.21.1.jar?raw=true) · [Исходники и инструкция](BetterCarpetBots/README.md) · [SHA-256](mods/better-carpet-bots-1.1.0+mc1.21.1.jar.sha256)
+
+Неофициальный перенос Better Carpet Bots 1.1.0 от Matej Stastny с Minecraft 1.21.11 на 1.21.1, лицензия MIT. Нужны Fabric Loader, Carpet для 1.21/1.21.1 и Java 21. Проверено с Fabric Loader 0.16.14 и Carpet 1.4.147.
+
+**Создать бота:** `/bot spawn SteveBot` в чате игры. Без имени: `/bot spawn`. Бот появляется на вашей позиции. Управление: `/bot SteveBot attack`, `/bot SteveBot inventory`, `/bot SteveBot stop`, `/bot SteveBot kill`. Список ботов: `/bots list`.
+
+**Установка:** удалить старый JAR Better Carpet Bots из папки `mods` и поместить туда новый. Проверены запуск сервера, команды и инвентарь: 29 консольных проверок и 88 интеграционных проверок.
